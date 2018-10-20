@@ -5,9 +5,10 @@ int			parse_rooms(t_lemin *lem)
 	char	*line;
 
 	
-	while (get_next_line(0, &line) == 1 && !valid_link(lem, line) )
+	while (get_next_line(0, &line) == 1 && !valid_link(lem, line))
 	{
-		printf("|%s|\n", line);
+	
+		// printf("|%s|\n", line);
 		if (*line == '#')
 		{
 			if ((ft_strstr(line, "##start") || ft_strstr(line, "##end")))
@@ -23,20 +24,21 @@ int			parse_rooms(t_lemin *lem)
 				continue ;
 			}
 		}
-		if(!ft_strchr(line, ' ') &&  !valid_room(lem, line))
-			ft_error("INVALID ROOM");
+		// if(!ft_strchr(line, ' ') &&  !valid_room(lem, line))
+		// 	ft_error("INVALID ROOM");
 		if (ft_strchr(line, ' ') && valid_room(lem, line) == 1)
 		{
 			create_room(lem, line);
 			ft_strdel(&line);
 		}
-	
+
 		free_split(lem->valid_room);
 	}
 
-	// exit(1);
+	// system("leaks lem-in");
 	lem->links = (t_jlist**)ft_memalloc(sizeof(t_jlist) * (lem->sum + 1));
 	lem->links[lem->sum] = NULL;
+		
 	if(check_start_end(lem) == 0)
 	{
 		if(lem->check < 2)
@@ -44,14 +46,15 @@ int			parse_rooms(t_lemin *lem)
 		else if(lem->check > 2)
 			ft_error("START OR END ALREADY EXIST");
 	}
+	
 	// print_rooms(lem);
-
+	if(line == NULL)
+		ft_error("da");
 	free_split(lem->valid_link);
-
+	
 	if(valid_link(lem, line))
 	{
 		parse_links(lem, line);
-
 	}
 	return (0);
 }

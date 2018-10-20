@@ -35,7 +35,6 @@ int		parse_ants(t_lemin *lem)
 		}
 	}
 
-	ft_strdel(&line);
-
+	free (line);
 	return (0);
 }

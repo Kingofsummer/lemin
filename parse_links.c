@@ -7,7 +7,7 @@ void			free_split(char **arr)
 
 	while (arr[i])
 	{
-		ft_memdel((void **)&arr[i]);
+		free(arr[i]);
 		i++;
 	}
 	free(arr);
@@ -15,25 +15,22 @@ void			free_split(char **arr)
 
 int			valid_link(t_lemin *lem, char *line)
 {
+	printf("%s\n", line);
+	if(line == NULL)
+		ft_error("da");
 	if(count(line, ' ') == 2 && count_l(line, '-') == 1)
 		ft_error("INVALID COORD");
-
-    if (ft_strchr(line, '-'))
+	if (ft_strchr(line, '-'))
 	{
-
-        lem->valid_link = ft_strsplit(line, '-');
-
+		lem->valid_link = ft_strsplit(line, '-');
 		if(count_l(line, '-') != 1)
 			ft_error("INVALID LINK");
 		if(ft_strcmp(lem->valid_link[0],lem->valid_link[1]) == 0)
 			ft_error("THE SAME COORDs IN LINK");
 		if (count_l(line, '-') == 1 )
-		{
-
-            if (plagiat_link(lem) == 1)
-			{
+		{	
+			if (plagiat_link(lem) == 1)
 				return (1);
-			}
 			else if(plagiat_link(lem) != 1 && *line != '#')
 			{
 				free_split(lem->valid_link);
@@ -42,6 +39,7 @@ int			valid_link(t_lemin *lem, char *line)
 			return(1);
 		}
 	}
+	
 	return (0);
 }
 
@@ -65,7 +63,6 @@ int		plagiat_link(t_lemin *lem)
 
 int		parse_links(t_lemin *lem, char *line)
 {
-
 	while (1 )
 	{
 		if (ft_strchr(line, '#'))
@@ -85,23 +82,19 @@ int		parse_links(t_lemin *lem, char *line)
 			}
 		}
 		free_split(lem->valid_link);
-
 		if (valid_link(lem, line))
 		{
 			add_first(lem);
-
 			add_second(lem);
-
 			ft_strdel(&line);
 			get_next_line(0, &line);
 			if(!line)
 				break;
 		}
-
+	
 		// free_split(lem->valid_link);
 		// printf("%s %s\n", lem->valid_link[0],lem->valid_link[1]);
-	}
-
+	} 
 	return (0);
 }
  

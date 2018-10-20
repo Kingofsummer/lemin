@@ -39,8 +39,8 @@ int		main(int ac, char **av)
 	t_lemin	lem;
 	t_text *tmp;
 	line = NULL;
-	int fd = open(av[1], O_RDONLY);
-	dup2(fd, STDIN_FILENO);
+	// int fd = open(av[1], O_RDONLY);
+	// dup2(fd, STDIN_FILENO);
 	ft_bzero(&lem, sizeof(t_lemin));
 	
 	parse_ants(&lem);
@@ -51,9 +51,8 @@ int		main(int ac, char **av)
 
 		// exit(1);
 	main_searcher(&lem);
-    system("leaks lemin");
-
-    exit(1);
+	system("leaks lem-in");
+	exit(1);
 
 	// ft_strdel(&line);
 	
