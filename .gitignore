@@ -1,0 +1,6 @@
+*.o
+*.a
+cmake-build-debug
+.idea
+.vscode
+.DS_Store

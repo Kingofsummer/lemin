@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.9)
+aux_source_directory(. LEM_IN_SRC)
+aux_source_directory(libft LIBFT_SRC)
+add_library(ft STATIC ${LIBFT_SRC})
+add_executable(lemin ${LEM_IN_SRC})
+target_link_libraries(lemin ft)
