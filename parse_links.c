@@ -101,7 +101,6 @@ int		parse_links(t_lemin *lem, char *line)
 		// free_split(lem->valid_link);
 		// printf("%s %s\n", lem->valid_link[0],lem->valid_link[1]);
 	}
-	system("leaks lemin");
 
 	return (0);
 }
